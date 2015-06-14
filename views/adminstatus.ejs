@@ -1,0 +1,292 @@
+<% include header %>
+<script src="/angular/adminController.js"></script>
+<link rel="stylesheet" href="/highlight/styles/default.css">
+<script src="/highlight/highlight.pack.js"></script>
+<style>
+.headline {
+  display: block;
+  margin: 10px 0 15px 0;
+  border-bottom: 1px dotted #e4e9f0;
+}
+.headline h2, .headline h3, .headline h4 {
+  margin: 0 0 -2px 0;
+  padding-bottom: 5px;
+  display: inline-block;
+  border-bottom: 2px solid #72c02c;
+}
+.code {
+  margin-top: 10px;
+  padding: 10px;
+}
+</style>
+  <!-- #section:basics/navbar.layout -->
+<div id="navbar" class="navbar navbar-default">
+	<script type="text/javascript">
+		try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<!-- #section:basics/sidebar.mobile.toggle -->
+		<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+			<span class="sr-only">Toggle sidebar</span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+		</button>
+
+		<!-- /section:basics/sidebar.mobile.toggle -->
+		<div class="navbar-header pull-left">
+			<!-- #section:basics/navbar.layout.brand -->
+			<a href="#" class="navbar-brand">
+				<small>
+					<i class="fa fa-leaf"></i>
+					KING Cloud Admin
+				</small>
+			</a>
+
+			<!-- /section:basics/navbar.layout.brand -->
+
+			<!-- #section:basics/navbar.toggle -->
+
+			<!-- /section:basics/navbar.toggle -->
+		</div>
+
+		<!-- /section:basics/navbar.dropdown -->
+	</div><!-- /.navbar-container -->
+</div>
+		<div class="main-container" id="main-container" ng-app="app" ng-controller="appStatusController">
+		    <!-- #section:basics/sidebar -->
+          <div id="sidebar" class="sidebar responsive">
+              <script type="text/javascript">
+                  try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+              </script>
+
+              <ul class="nav nav-list">
+                  <li class="active">
+                      <a href="/admin/status">
+                          <i class="menu-icon fa fa-tachometer"></i>
+                          <span class="menu-text"> 总览 </span>
+                      </a>
+
+                      <b class="arrow"></b>
+                  </li>
+
+                  <li>
+                      <a href="/admin">
+                          <i class="menu-icon fa fa-user"></i>
+                          <span class="menu-text"> 用户 </span>
+                      </a>
+
+                      <b class="arrow"></b>
+                  </li>
+              </ul><!-- /.nav-list -->
+
+              <!-- #section:basics/sidebar.layout.minimize -->
+              <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                  <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+              </div>
+
+              <!-- /section:basics/sidebar.layout.minimize -->
+              <script type="text/javascript">
+                  try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+              </script>
+          </div>
+			<div class="main-content">
+				<div class="page-content">
+					<div class="page-header">
+						<h1>
+							管理页面 - 总览
+						</h1>
+					</div><!-- /.page-header -->
+					<div class="row">
+					<div class="col-xs-2"></div>
+						<div class="col-xs-8">
+                          <div class="space-6"></div>
+                           <div class="row">
+                                <div class="col-xs-3"></div>
+                                <div class="col-xs-6">
+                                    <table id="simple-table" class="table table-striped table-bordered table-hover">
+                                        <tr>
+                                          <th width="30%">用户数目</th>
+                                          <td>{{ user_cnt }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th>云主机总数</th>
+                                          <td>{{ server_cnt }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th>云空间分配</th>
+                                          <td>{{ total_storage }} GB</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                          </div> 
+                          <div class="space-6"></div>
+                          <div class="row">
+                            <div class="col-xs-12">
+                             <div class="table-header">
+											待审核列表
+										</div>
+                              <table class="table table-bordered">
+                                <tr>
+                                  <th>ID</th>
+                                  <th>注册时间</th>
+                                  <th>公司名称</th>
+                                  <th>邮箱地址</th>
+                                  <th>操作</th>
+                                </tr>
+                                <tr ng-repeat="user in users">
+                                  <td>{{ $index - 0 + 1 }}</td>
+                                  <td>{{ user.joinDate | date }}</td>
+                                  <td>{{ user.username }}</td>
+                                  <td>{{ user.email }}</td>
+                                  <td>
+                                    <button class="btn btn-xs btn-success" ng-click="allow(user._id)">允许注册</button>
+                                    <button class="btn btn-xs btn-error" ng-click="deny(user._id)">拒绝</button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td ng-show="users.length == 0" colspan=5 align="middle"><i>列表为空</i></td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+
+							<!-- PAGE CONTENT ENDS -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.page-content -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<% include scripts %>
+		<script>
+		$(function () {
+			$('th input[type="checkbox"]').on('change', function () {
+				if ($(this)[0].checked) {
+					$(this).closest('table').find('td input[type="checkbox"]').each(function () {
+						this.checked = true;
+					});
+				}
+				else {
+					$(this).closest('table').find('td input[type="checkbox"]').each(function () {
+						this.checked = false;
+					});
+				}
+			});
+			$('#new').on('click', function () {
+				window.location.href = "/shop/server";
+			});
+			$('td .control').on('click', function (e) {
+				if ($(this).hasClass('disabled')) return;
+				e.preventDefault();
+				var id = $(this).closest('tr').attr('data-id');
+				var type = $(this).attr('data-type');
+				var _this = this;
+				$(this).closest('div').find('button').addClass('disabled');
+				if (type == 'start') {
+					$(this).closest('tr').find('td.status span').html('正在启动');
+				}
+				else if (type == 'restart') {
+					$(this).closest('tr').find('td.status span').html('正在重启');
+				}
+				else if (type == 'stop') {
+					$(this).closest('tr').find('td.status span').html('正在关机');
+				}
+				setTimeout(function () {
+					$.post('/server/control', {id: [id], type: type}, function (data) {
+						if (data.status) {
+							if (type == 'start' || type == 'restart') {
+								$(_this).closest('div').find('button').each(function () {
+									if ($(this).attr('data-type') == 'stop' || $(this).attr('data-type') == 'restart') {
+										$(this).removeClass('disabled');
+									}
+								});
+								$(_this).closest('tr').find('td.lastStart').text(data.lastStartDateFormat[id]);
+								$(_this).closest('tr').find('td.status span').attr('class', 'label label-sm label-success').html('正常运行');
+							}
+							else if (type == 'stop') {
+								$(_this).closest('div').find('button').each(function () {
+									if ($(this).attr('data-type') == 'start') {
+										$(this).removeClass('disabled');
+									}
+								});
+								$(_this).closest('tr').find('td.status span').attr('class', 'label label-sm label-danger').html('已关闭');
+							}
+						}
+					});
+				}, Math.random() * 2500 + 500);
+			});
+			$('.table-control .control').on('click', function (e) {
+				e.preventDefault();
+				var idList = [];
+				$('table tr td input[type="checkbox"]').each(function () {
+					if ($(this)[0].checked && !$(this).closest('tr').find('td.status span').hasClass('label-warning')) {
+					 idList.push($(this).closest('tr').attr('data-id'));
+					}
+				});
+				console.log(idList);
+				var type = $(this).attr('data-type');
+				for (var i in idList) {
+					var id = idList[i];
+					$('tr').each(function () {
+						if ($(this).attr('data-id') == id) {
+							if (type == 'start') {
+								$(this).find('td.status span').each(function () {
+									if ($(this).hasClass('label-danger')) $(this).html('正在启动');
+								});
+							}
+							else if (type == 'restart') {
+								$(this).find('td.status span').each(function () {
+									if ($(this).hasClass('label-success')) $(this).html('正在重启');
+								});
+							}
+							else if (type == 'stop') {
+								$(this).find('td.status span').each(function () {
+									if ($(this).hasClass('label-success')) $(this).html('正在关机');
+								});
+							}
+
+						}
+					});
+				}
+				setTimeout(function () {
+					$.post('/server/control', {id: idList, type: type}, function (data) {
+						if (data.status) {
+							for (var i in idList) {
+								var id = idList[i];
+								$('tr').each(function () {
+									if ($(this).attr('data-id') == id) {
+
+										if (type == 'start' || type == 'restart') {
+											$(this).find('button').each(function () {
+												if ($(this).attr('data-type') == 'stop' || $(this).attr('data-type') == 'restart') {
+													$(this).removeClass('disabled');
+												}
+											});
+											$(this).find('td.lastStart').text(data.lastStartDateFormat[id]);
+											$(this).find('td.status span').attr('class', 'label label-sm label-success').html('正常运行');
+										}
+										else if (type == 'stop') {
+											$(this).find('button').each(function () {
+												if ($(this).attr('data-type') == 'start') {
+													$(this).removeClass('disabled');
+												}
+											});
+											$(this).find('td.status span').attr('class', 'label label-sm label-danger').html('已关闭');
+										}
+									}
+								});
+							}
+						}
+					});
+				}, Math.random() * 2500 + 500);
+
+			});
+		});
+		</script>
+	</body>
+</html>

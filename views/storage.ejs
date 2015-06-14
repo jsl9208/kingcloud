@@ -1,0 +1,116 @@
+<% include header %>
+		<% include navbar %>
+		<link rel="stylesheet" href="/zTree/zTreeStyle.css">
+		<link rel="stylesheet" href="/assets/css/dropzone.css">
+		<style>
+
+          .ztree * {
+            font-family: inherit;
+            font-size: 14px;
+          }
+        </style>
+		<div class="main-container" id="main-container" ng-app="app" ng-controller="appController">
+			<% include sidebar %>
+			<div class="main-content">
+				<!-- #section:basics/content.breadcrumbs -->
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+					</script>
+
+					<ul class="breadcrumb">
+						<li>
+							<i class="ace-icon fa fa-home home-icon"></i>
+							<a href="/">控制台</a>
+						</li>
+						<li class="active">云存储</li>
+
+					</ul><!-- /.breadcrumb -->
+				</div>
+				<div class="page-content">
+					<div class="page-header">
+						<h1>
+							云存储
+						</h1>
+					</div><!-- /.page-header -->
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="btn-group">
+										<button class="btn btn-sm btn-success" ng-click="upload()" ng-hide="is_upload">&nbsp;<i class="fa fa-cloud-upload"></i> 上传文件&nbsp;</button>
+										<button class="btn btn-sm btn-success" ng-click="is_upload=false" ng-show="is_upload">&nbsp;<i class="fa fa-cloud-upload"></i> 收起&nbsp;</button>
+										<button style="display: none" id="success" ng-click="uploadSuccess()"></button>
+										<button class="btn btn-sm btn-primary" ng-click="newDir()">&nbsp;新建文件夹&nbsp;</button>
+										<button class="btn btn-sm btn-primary" ng-click="download()">&nbsp;下载&nbsp;</button>
+										<a href="#" download style="display: none" id="download_link"></a>
+										<button class="btn btn-sm btn-primary" ng-click="delete()">&nbsp;删除&nbsp;</button>
+									</div>
+
+								</div>
+							</div>
+							<div class="space-6"></div>
+							<div class="row" ng-show="is_upload">
+							  <div class="col-xs-6">
+							    <form method="POST" action="/upload" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+							      <input type="hidden" name="path" value="{{ upload_path }}" >
+							    </form> 
+							  </div>
+							</div>
+							<div class="row">
+									<div class="col-xs-6">
+										<div class="widget-box widget-color-blue2">
+											<div class="widget-body">
+												<div class="widget-main padding-8">
+													<ul id="tree" class="ztree" ng-show="data.data.length > 0">
+													</ul>
+													<i style="color: gray; margin-left: 20px" ng-hide="data.data.length > 0">目录为空</i>
+													<!-- <div id="jstree_demo_div"></div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-6">
+									  
+									</div>
+							</div>	
+							<input type="hidden" id="file_name">
+							<input type="hidden" id="file_size">
+
+							<!-- PAGE CONTENT ENDS -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.page-content -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<% include scripts %>		
+		<script src="/zTree/jquery.ztree.all-3.5.min.js"></script>
+		<script src="/assets/js/dropzone.js"></script>
+		<script src="/assets/js/bootbox.js"></script>
+		<script src="/angular/storageController.js"></script>
+		<script>
+          
+        $(function () {
+          Dropzone.options.myAwesomeDropzone = {
+            init: function() {
+              this.on("success", function() { 
+                console.log('success');
+                $('#success').click();
+              });
+                this.on('addedfile', function (file) {
+                    console.log(file);
+                    var name = file.name;
+                    var size = file.size;
+                    $('#file_name').val(name);
+                    $('#file_size').val(size);
+                })
+            }
+          };
+
+        });
+        </script>
+
+	</body>
+</html>

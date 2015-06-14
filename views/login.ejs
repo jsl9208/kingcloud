@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>登陆 - KING Cloud</title>
+
+		<meta name="description" content="User login page" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="../assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="../assets/css/font-awesome.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="../assets/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="../assets/css/ace.css" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="../assets/css/ace-part2.css" />
+		<![endif]-->
+		<link rel="stylesheet" href="../assets/css/ace-rtl.css" />
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
+		<![endif]-->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="../assets/js/html5shiv.js"></script>
+		<script src="../assets/js/respond.js"></script>
+		<![endif]-->
+		<style>
+		.alert {
+			display: none;
+		}
+		</style>
+	</head>
+
+	<body class="login-layout light-login">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h1>
+									<i class="ace-icon fa fa-leaf green"></i>
+									<span class="red">KING</span>
+									<span class="grey" id="id-text2">Cloud</span>
+								</h1>
+								<!-- <h4 class="light-blue" id="id-company-text">&copy; Company Name</h4> -->
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="ace-icon fa fa-coffee green"></i>
+												请输入注册邮箱和密码
+											</h4>
+											<div class="alert alert-danger">
+												<button type="button" class="close" data-dismiss="alert">
+													<i class="ace-icon fa fa-times"></i>
+												</button>
+												<span></span>
+											</div>
+											<div class="space-6"></div>
+
+											<form id="login-form" action="/login" methon="POST">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" name="email" class="form-control" placeholder="邮箱地址" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" name="password" class="form-control" placeholder="密码" />
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"> 记住我</span>
+														</label>
+
+														<button type="button" id="login" class="width-35 pull-right btn btn-sm btn-primary">
+															<i class="ace-icon fa fa-key"></i>
+															<span class="bigger-110">登陆</span>
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+
+											<!-- <div class="social-or-login center">
+												<span class="bigger-110">Or Login Using</span>
+											</div>
+
+											<div class="space-6"></div>
+
+											<div class="social-login center">
+												<a class="btn btn-primary">
+													<i class="ace-icon fa fa-facebook"></i>
+												</a>
+
+												<a class="btn btn-info">
+													<i class="ace-icon fa fa-twitter"></i>
+												</a>
+
+												<a class="btn btn-danger">
+													<i class="ace-icon fa fa-google-plus"></i>
+												</a>
+											</div> -->
+										</div><!-- /.widget-main -->
+
+										<div class="toolbar clearfix">
+											<div>
+												<a href="#" data-target="#forgot-box" class="forgot-password-link">
+													<i class="ace-icon fa fa-arrow-left"></i>
+													忘记密码
+												</a>
+											</div>
+
+											<div>
+												<a href="#" data-target="#signup-box" class="user-signup-link">
+													注册
+													<i class="ace-icon fa fa-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.login-box -->
+
+								<div id="forgot-box" class="forgot-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												重置密码
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												请输入注册邮箱以接收密码重置邮件
+											</p>
+
+											<form>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control" placeholder="Email" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+
+													<div class="clearfix">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+															<i class="ace-icon fa fa-lightbulb-o"></i>
+															<span class="bigger-110">发送</span>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div><!-- /.widget-main -->
+
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box" class="back-to-login-link">
+												返回登陆
+												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.forgot-box -->
+
+								<div id="signup-box" class="signup-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header green lighter bigger">
+												<i class="ace-icon fa fa-users blue"></i>
+												新用户注册
+											</h4>
+											<div class="alert alert-danger">
+												<button type="button" class="close" data-dismiss="alert">
+													<i class="ace-icon fa fa-times"></i>
+												</button>
+												<span></span>
+											</div>
+
+											<div class="space-6"></div>
+											<p> 请输入详细信息: </p>
+
+											<form id="signup-form" action="/register" method="POST">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" name="email" class="form-control" placeholder="邮箱" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" name="username" class="form-control" placeholder="公司名称" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="password" name="password" class="form-control" placeholder="密码" />
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" name="cpassword" class="form-control" placeholder="确认密码" />
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+													</label>
+
+													<label class="block">
+														<input type="checkbox" name="agreement"class="ace" />
+														<span class="lbl">
+															我已阅读并接受
+															<a href="#">用户协议</a>
+														</span>
+													</label>
+
+													<div class="space-24"></div>
+
+													<div class="clearfix">
+														<button type="reset" id="reg-reset" class="width-30 pull-left btn btn-sm">
+															<i class="ace-icon fa fa-refresh"></i>
+															<span class="bigger-110">重置</span>
+														</button>
+
+														<button type="button" id="reg" class="width-65 pull-right btn btn-sm btn-success">
+															<span class="bigger-110">注册</span>
+
+															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div>
+
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box" class="back-to-login-link">
+												<i class="ace-icon fa fa-arrow-left"></i>
+												返回登陆
+											</a>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.signup-box -->
+							</div><!-- /.position-relative -->
+
+							<!-- <div class="navbar-fixed-top align-right">
+								<br />
+								&nbsp;
+								<a id="btn-login-dark" href="#">Dark</a>
+								&nbsp;
+								<span class="blue">/</span>
+								&nbsp;
+								<a id="btn-login-blur" href="#">Blur</a>
+								&nbsp;
+								<span class="blue">/</span>
+								&nbsp;
+								<a id="btn-login-light" href="#">Light</a>
+								&nbsp; &nbsp; &nbsp;
+							</div>
+						</div> -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='../assets/js/jquery.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+		</script>
+		<script src="/assets/js/jquery.validate.js"></script>
+		<script src="/assets/js/spin.js"></script>
+		
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			var opts = {            
+          lines: 12, // 花瓣数目
+          length: 7, // 花瓣长度
+          width: 2, // 花瓣宽度
+          radius: 5, // 花瓣距中心半径
+          corners: 1, // 花瓣圆滑度 (0-1)
+          rotate: 0, // 花瓣旋转角度
+          direction: 1, // 花瓣旋转方向 1: 顺时针, -1: 逆时针
+          color: '#FFF', // 花瓣颜色
+          speed: 1, // 花瓣旋转速度
+          trail: 30, // 花瓣旋转时的拖影(百分比)
+          shadow: false, // 花瓣是否显示阴影
+          hwaccel: false, //spinner 是否启用硬件加速及高速旋转            
+          className: 'spinner', // spinner css 样式名称
+          zIndex: 2e9, // spinner的z轴 (默认是2000000000)
+          top: 'auto', // spinner 相对父容器Top定位 单位 px
+          left: '50%'// spinner 相对父容器Left定位 单位 px
+      };
+
+      var spinner = new Spinner(opts);
+			jQuery(function($) {
+			  $(document).on('click', '.toolbar a[data-target]', function(e) {
+					e.preventDefault();
+					var target = $(this).data('target');
+					$('.widget-box.visible').removeClass('visible');//hide others
+					$(target).addClass('visible');//show target
+			  });
+			  $('#signup-form').validate({
+				    errorElement: 'div',
+				    errorClass: 'help-block',
+				    focusInvalid: false,
+				    rules: {
+				      email: {
+				        required: true,
+				        email: true
+				      },
+				      username: {
+				        required: true
+				      },
+				      password: {
+				        required: true,
+				        minlength: 6
+				      },
+				      cpassword: {
+				      	required: true,
+				        minlength: 6,
+				        equalTo: '#password'
+				      },
+				      agreement: {
+				        required: true
+				      }
+				    },
+
+				    messages: {
+				        email: {
+				          required: "请输入邮箱地址",
+				          email: "请输入正确的邮箱地址"
+				        },
+				        username: {
+					        required: '请输入用户名'
+					      },
+					      password: {
+					        required: '请输入密码',
+					        minlength: '密码至少由6位英文字母，数字或下划线组成'
+					      },
+					      cpassword: {
+					      	required: '请输入相同密码以确认',
+					        minlength: '密码至少由6位英文字母，数字或下划线组成',
+					        equalTo: '两次输入的密码不一致'
+					      },
+					      agreement: {
+					        required: '阅读并同意用户协议以继续注册'
+					      }
+				    },
+
+				    highlight: function (e) {
+				        $(e).closest('label').removeClass('has-info').addClass('has-error');
+				    },
+
+				    success: function (e) {
+				        $(e).closest('label').removeClass('has-error').addClass('has-info');
+				        $(e).remove();
+				    },
+
+				    errorPlacement: function (error, element) {
+				    	if (element.attr('type') == 'checkbox') {
+				        error.appendTo(element.parent());
+				    	}
+				    	else {
+				        error.insertAfter(element.parent());
+				      }
+				    },
+
+				    submitHandler: function(form) {
+				    	var data = {};
+					    $(form).find('input').each(function () {
+					    	data[$(this).attr('name')] = $(this).val();
+					    });
+					    $('#reg').html('').addClass('disabled').css({height: '35px'});
+					    $('#reg-reset').addClass('disabled');
+					    spinner.spin($('#reg')[0]);
+					    $('#signup-box .alert').fadeOut();
+					    $.post('/register', data, function (data) {
+					    	if (!data.status) {
+					    		$('#signup-box .alert').fadeIn().find('span').text(data.error);
+					    		spinner.spin();
+					    		$('#reg').html('<span class="bigger-110">注册</span><i class="ace-icon fa fa-arrow-right icon-on-right"></i>').removeClass('disabled');
+					    		$('#reg-reset').removeClass('disabled');
+					    	}
+					    	else {
+                                alert('注册成功，请等待管理员审核！');
+					    		window.location.href = '/';
+					    	}
+					    });
+					  }
+				});
+				$('#login-form').validate({
+				    errorElement: 'div',
+				    errorClass: 'help-block',
+				    focusInvalid: false,
+				    rules: {
+				      email: {
+				        required: true,
+				        email: true
+				      },
+				      password: {
+				        required: true
+				      }
+				    },
+
+				    messages: {
+				        email: {
+				          required: "请输入邮箱地址",
+				          email: "请输入正确的邮箱地址"
+				        },
+					      password: {
+					        required: '请输入密码'
+					      }
+				    },
+
+				    highlight: function (e) {
+				        $(e).closest('label').removeClass('has-info').addClass('has-error');
+				    },
+
+				    success: function (e) {
+				        $(e).closest('label').removeClass('has-error').addClass('has-info');
+				        $(e).remove();
+				    },
+
+				    errorPlacement: function (error, element) {
+				    	if (element.attr('type') == 'checkbox') {
+				        error.appendTo(element.parent());
+				    	}
+				    	else {
+				        error.insertAfter(element.parent());
+				      }
+				    },
+
+				    submitHandler: function(form) {
+				    	var data = {};
+					    $(form).find('input').each(function () {
+					    	data[$(this).attr('name')] = $(this).val();
+					    });
+					    $('#login').html('').addClass('disabled').css({height: '35px'});
+					    spinner.spin($('#login')[0]);
+					    $('#login-box .alert').fadeOut();
+					    $.post('/login', data, function (data) {
+					    	if (!data.status) {
+					    		$('#login-box .alert').fadeIn().find('span').text(data.error);
+					    		spinner.spin();
+					    		$('#login').html('<i class="ace-icon fa fa-key"></i><span class="bigger-110">登陆</span>').removeClass('disabled');
+					    	}
+					    	else {
+					    		window.location.href = '/dashboard';
+					    	}
+					    });
+					  }
+				});
+
+				$('#login').on('click', function () {
+					$(this).closest('form').submit();
+				});
+				$('#reg').on('click', function () {
+					$(this).closest('form').submit();
+				});
+				$('.alert .close').on('click', function () {
+					$(this).closest('.alert').fadeOut();
+				});
+			});
+			
+		</script>
+	</body>
+</html>
