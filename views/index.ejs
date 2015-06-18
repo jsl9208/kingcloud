@@ -364,6 +364,13 @@
                 <!-- Our Services -->
                 <div class="who margin-bottom-30">
                     <div class="headline"><h2>信息推送</h2></div>
+                    <% if (docs) { %>
+                    <ul class="list-unstyled">
+                    	<% for (var i in docs) { %>
+                    	<li>[新闻] <a style="text-decoration: underline; color: #0078b6!important;" href="/news/<%= docs[i]._id %>"><%= docs[i].title %></a><small style="color: gray" class="pull-right"><%= (new Date(docs[i].date)).getMonth() + 1 %>/<%= (new Date(docs[i].date)).getDate() %></small></li>
+                    	<% } %>
+					</ul>
+                    <% } %>
                     <wb:list appkey="152333821" border="n" creater="n" info="n" sidebar="n" footbar="y" width="260" height="500" listid="3839595533973115" uid="2413927517" ></wb:list>
                 </div>
 

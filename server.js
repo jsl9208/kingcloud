@@ -186,7 +186,17 @@ app.use(session({
     cookie: { secure: false }
 }));
 app.get('/', function (req, res) {
-  res.render('index');
+	Db.collection('publish', function (err, collection) {
+		if (!err) {
+			collection.find().sort({date: -1}).limit(5).toArray(function (err, docs) {
+				if (!err) {
+					if (!docs) docs = 0;
+					console.log(docs);
+  					res.render('index', {docs: docs});	
+				}
+			});
+		}
+	});
 });
 
 app.get('/dashboard', function (req, res) {
@@ -477,6 +487,28 @@ app.get('/api/admin', function (req, res) {
 });
 app.get('/admin/status', auth, function (req, res) {
   res.render('adminstatus', {constants: constants, page: 'admin'});
+});
+app.get('/admin/publish', auth, function (req, res) {
+  res.render('adminpublish', {constants: constants, page: 'admin'});
+});
+app.post('/admin/publish', function (req, res) {
+	req.body.date = new Date().valueOf();
+  Db.collection('publish', function (err, collection) {
+	 collection.save(req.body, function (e) {
+		 collection.findOne({title: req.body.title}, function (err, doc) {
+			 res.json({url: '/news/' + doc._id, title: doc.title});
+		 });
+	 }); 
+  });
+});
+app.get('/news/:id', function (req, res) {
+  Db.collection('publish', function (err, collection) {
+  	collection.findOne({_id: new ObjectId(req.param('id'))}, function (err, doc) {
+	  if (doc) {
+		  res.render('news', doc);
+	  }
+	});
+  });
 });
 
 app.listen(port);

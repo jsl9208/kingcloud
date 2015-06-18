@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en" xmlns:wb="http://open.weibo.com/wb"> <!--<![endif]-->  
+<head>
+    <title>新闻 - KING Cloud</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="/unify/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/unify/assets/css/style.css">
+
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="/unify/assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="/unify/assets/css/footers/footer-v1.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/unify/assets/plugins/animate.css">
+    <link rel="stylesheet" href="/unify/assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="/unify/assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="/unify/assets/plugins/horizontal-parallax/css/horizontal-parallax.css">
+    <link rel="stylesheet" href="/unify/assets/css/pages/pricing/pricing_v7.css">  
+   
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="/unify/assets/css/custom.css">
+    
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=" type="text/javascript" charset="utf-8"></script>
+</head> 
+
+<body>
+
+<div class="wrapper">
+    <!--=== Header ===-->    
+    <div class="header">
+        <div class="container" style="margin-bottom: 0">
+            <!-- Logo -->
+            <a class="logo" style="text-decoration: none; width: 200px" href="/">
+                <h1>
+                    <i class="ace-icon fa fa-leaf" style="color: #69aa46"></i>
+                    <span style="color: #dd5a43">KING</span>
+                    <span style="color: #777777">Cloud</span>
+                </h1>
+            </a>
+            <!-- End Logo -->
+            
+            <!-- Topbar -->
+            <div class="topbar">
+                <ul class="loginbar pull-right">  
+                    <li><a href="#">帮助</a></li>  
+                    <li class="topbar-devider"></li>   
+                    <li><a href="/login">登录</a></li>   
+                </ul>
+            </div>
+            <!-- End Topbar -->
+
+            <!-- Toggle get grouped for better mobile display -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <!-- End Toggle -->
+        </div><!--/end container-->
+
+    </div>
+    <!--=== End Header ===-->
+
+    <!--=== Slider ===-->
+    <div id="sequence-theme" class="sequence-inner">
+        <div id="sequence">
+            <img class="prev" src="/unify/assets/plugins/horizontal-parallax/images/bt-prev1.png" alt="Previous" />
+            <img class="next" src="/unify/assets/plugins/horizontal-parallax/images/bt-next1.png" alt="Next" />
+            <ul>
+                <li class="animate-in">
+                    <div class="info">
+                        <h2>云服务器</h2>
+                        <p>一种简单高效，处理能力可弹性伸缩的计算服务助您快速构建更稳定、安全的应用。提升运维效率，降低IT成本，使您更专注于核心业务创新</p>
+                    </div>
+                    <img class="balloon" src="/unify/assets/plugins/horizontal-parallax/images/balloon.png" alt="Balloon" />
+                </li>
+                <li>
+                    <div class="info">
+                        <h2>云存储</h2>
+                        <p>海量、安全和高可靠的云存储服务。RESTFul API的平台无关性，容量和处理能力的弹性扩展，按实际容量付费真正使您专注于核心业务。</p>
+                    </div>
+                    <img class="aeroplane" src="/unify/assets/plugins/horizontal-parallax/images/aeroplane.png" alt="Aeroplane" />
+                </li>
+                <!-- <li>
+                    <div class="info">
+                        <h2>Cutting Edge</h2>
+                        <p>Supports modern browsers, old browsers (IE8+), touch devices and responsive designs</p>
+                    </div>
+                    <img class="kite" src="/unify/assets/plugins/horizontal-parallax/images/kite.png" alt="Kite" />
+                </li> -->
+            </ul>
+        </div>
+    </div><!--/sequence-theme-->
+    <!--=== End Slider ===-->
+
+    <!--=== Content Part ===-->
+    <div class="container content"> 
+        <div class="row">
+           <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="blog margin-bottom-40">
+					<h2><%= title %></h2>
+					<div class="blog-post-tags">
+						<ul class="list-unstyled list-inline blog-info">
+						<% var d = new Date(date); %>
+							<li><i class="fa fa-calendar"></i> <%= d.toLocaleDateString() %></li>
+						</ul>                    
+					</div>
+					<%= text %>
+				</div>
+            </div>
+        </div>    
+    </div><!--/container-->     
+    <!-- End Content Part -->
+
+    <!--=== Footer Version 1 ===-->
+    <div class="footer-v1">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <!-- About -->
+                    <div class="col-md-3 md-margin-bottom-40">
+                        <a class="logo" style="text-decoration: none; width: 200px" href="/">
+                            <h1>
+                                <i class="ace-icon fa fa-leaf" style="color: #69aa46"></i>
+                                <span style="color: #dd5a43">KING</span>
+                                <span style="color: #777777">Cloud</span>
+                            </h1>
+                        </a>
+                        <p>创新的云服务整合平台</p>
+                        <p>帮助您提升运维效率，降低IT成本</p>    
+                    </div><!--/col-md-3-->
+                    <!-- End About -->
+
+
+                </div>
+            </div> 
+        </div><!--/footer-->
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">                     
+                        <p>
+                            2015 &copy; All Rights Reserved.
+                           <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                        </p>
+                    </div>
+                </div>
+            </div> 
+        </div><!--/copyright-->
+    </div>     
+    <!--=== End Footer Version 1 ===-->
+</div><!--/wrapper-->
+
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="/unify/assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="/unify/assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="/unify/assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="/unify/assets/plugins/horizontal-parallax/js/sequence.jquery-min.js"></script>
+<script type="text/javascript" src="/unify/assets/plugins/horizontal-parallax/js/horizontal-parallax.js"></script>
+<!-- JS Customization -->
+<script type="text/javascript" src="/unify/assets/js/custom.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="/unify/assets/js/app.js"></script>
+<script type="text/javascript" src="/unify/assets/js/plugins/owl-recent-works.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        OwlRecentWorks.initOwlRecentWorksV2();        
+    });
+</script>
+<!--[if lt IE 9]>
+    <script src="/unify/assets/plugins/respond.js"></script>
+    <script src="/unify/assets/plugins/html5shiv.js"></script>
+    <script src="/unify/assets/plugins/placeholder-IE-fixes.js"></script>
+<![endif]-->		
+
+</body>
+</html>	

@@ -1,0 +1,178 @@
+<% include header %>
+<script src="/angular/adminController.js"></script>
+<link rel="stylesheet" href="/highlight/styles/default.css">
+<script src="/highlight/highlight.pack.js"></script>
+<style>
+.headline {
+  display: block;
+  margin: 10px 0 15px 0;
+  border-bottom: 1px dotted #e4e9f0;
+}
+.headline h2, .headline h3, .headline h4 {
+  margin: 0 0 -2px 0;
+  padding-bottom: 5px;
+  display: inline-block;
+  border-bottom: 2px solid #72c02c;
+}
+.code {
+  margin-top: 10px;
+  padding: 10px;
+}
+</style>
+  <!-- #section:basics/navbar.layout -->
+<div id="navbar" class="navbar navbar-default">
+	<script type="text/javascript">
+		try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<!-- #section:basics/sidebar.mobile.toggle -->
+		<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+			<span class="sr-only">Toggle sidebar</span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+		</button>
+
+		<!-- /section:basics/sidebar.mobile.toggle -->
+		<div class="navbar-header pull-left">
+			<!-- #section:basics/navbar.layout.brand -->
+			<a href="#" class="navbar-brand">
+				<small>
+					<i class="fa fa-leaf"></i>
+					KING Cloud Admin
+				</small>
+			</a>
+
+			<!-- /section:basics/navbar.layout.brand -->
+
+			<!-- #section:basics/navbar.toggle -->
+
+			<!-- /section:basics/navbar.toggle -->
+		</div>
+
+		<!-- /section:basics/navbar.dropdown -->
+	</div><!-- /.navbar-container -->
+</div>
+		<div class="main-container" id="main-container" ng-app="app" ng-controller="appStatusController">
+		    <!-- #section:basics/sidebar -->
+          <div id="sidebar" class="sidebar responsive">
+              <script type="text/javascript">
+                  try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+              </script>
+
+              <ul class="nav nav-list">
+                  <li>
+                      <a href="/admin/status">
+                          <i class="menu-icon fa fa-tachometer"></i>
+                          <span class="menu-text"> 总览 </span>
+                      </a>
+
+                      <b class="arrow"></b>
+                  </li>
+
+                  <li>
+                      <a href="/admin">
+                          <i class="menu-icon fa fa-user"></i>
+                          <span class="menu-text"> 用户 </span>
+                      </a>
+
+                      <b class="arrow"></b>
+                  </li>
+                  
+                  <li class="active">
+                      <a href="/admin/publish">
+                          <i class="menu-icon fa fa-user"></i>
+                          <span class="menu-text"> 发布信息 </span>
+                      </a>
+
+                      <b class="arrow"></b>
+                  </li>
+              </ul><!-- /.nav-list -->
+
+              <!-- #section:basics/sidebar.layout.minimize -->
+              <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                  <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+              </div>
+
+              <!-- /section:basics/sidebar.layout.minimize -->
+              <script type="text/javascript">
+                  try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+              </script>
+          </div>
+			<div class="main-content">
+				<div class="page-content">
+					<div class="page-header">
+						<h1>
+							管理页面 - 发布信息
+						</h1>
+					</div><!-- /.page-header -->
+					<div class="row">
+						<form action="/admin/publish" method="POST">
+							<div class="col-xs-12">
+								<label for="title">标题</label>
+								<input type="text" class="form-control" name="title" id="title">
+								<div class="space-6"></div>
+							</div>
+							<div class="col-xs-12">
+								<label for="my-editor">内容</label>
+								<div class="wysiwyg-editor" id="my-editor"></div>
+							</div>
+							<div class="clearfix">
+								<div class="space-6"></div>
+								<div class="col-sm-9">
+									<button id="save" type="submit" class="btn btn-success">
+										保存
+										<i class="ace-icon fa fa-check icon-on-right bigger-110"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div><!-- /.page-content -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<% include scripts %>
+		<script src="/assets/js/jquery.hotkeys.js"></script>
+		<script src="/assets/js/bootstrap-wysiwyg.js"></script>
+		<script>
+		$(function () {
+			$('#my-editor').ace_wysiwyg();
+			$('#save').click(function (e) {
+				e.preventDefault();
+				if (!$('#title').val()) {
+					$.gritter.add({
+						title: '发布失败',
+						text: '错误: 标题不能为空',
+						class_name: 'gritter-danger gritter-center gritter-light'
+					});
+				}
+				else if (!$('#my-editor').html()) {
+					$.gritter.add({
+						title: '发布失败',
+						text: '错误: 内容不能为空',
+						class_name: 'gritter-danger gritter-center gritter-light'
+					});
+				}
+				else {
+					var data = {
+						title: $('#title').val(),
+						text: $('#my-editor').html()
+					}
+					$.post('/admin/publish', data, function (data) {
+						$.gritter.add({
+							title: '购买成功',
+							text: '发布成功，新闻链接：<a href="' + data.url + '">' + data.title + '</a>',
+							class_name: 'gritter-success gritter-center gritter-light'
+						});
+					});
+				}
+			});
+		});
+		</script>
+	</body>
+</html>
