@@ -463,7 +463,17 @@ app.post('/api/allow', function (req, res) {
     collection.findOne({_id: new ObjectId(req.body.id)}, function (err, doc) {
       doc.status = 1;
       collection.save(doc, function () {
-        res.json(doc);
+		  Db.collection('user', function (err, collection) {
+			delete doc._id;
+			delete doc.status;
+			  collection.insert(doc, function () {
+				  collection.findOne({email: doc.email}, function (err, doc) {
+					  fs.mkdirSync('public/upload/' + doc._id);
+        				res.json(doc);
+				  });
+				  
+			  });
+		  });
       });
     });  
   });
