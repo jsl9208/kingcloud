@@ -40,69 +40,69 @@ mongo.MongoClient.connect(mongoUri, function(err, db) {
   if(!err) {
     console.log("DB connected");
     Db = db;
-    fs.readFile('data.txt', function (err, data) {
-      var arr = data.toString().split('\n');
-      var res = [];
-      arr.forEach(function (item, index) {
-        var tmp = item.split('\t');
-        res[index] = {
-          name: tmp[0],
-          email: tmp[1]
-        };
-      });
-      Db.collection('user', function (err, collection) {
-        res.forEach(function (item, index) {
-          if (err) res.json({status: 0, error: '服务器忙，请稍后再试'});
-          else {
-            collection.findOne({email: item.email}, function (err, doc) {
-              if (!doc) {
-                doc = _.clone(userModel);
-                doc.email = item.email;
-                var sha1 = crypto.createHash('sha1');
-                sha1.update('password');
-                doc.password = sha1.digest('hex');
-                doc.username = item.name;
-                doc.joinDate = (new Date()).getTime();
-                collection.insert(doc, function () {
-                });
-              }
-              else {
-//                doc.account = 1000;
-//                var cnt = getRandomInt(1, 5);
-//                var cpu = 2 * getRandomInt(1, 2);
-//                var mem = 4 * getRandomInt(1, 2);
-//                var status = getRandomInt(-1, 1);
-//                for (var i = 0; i < cnt; ++i) {
-//                  doc.servers.push({
-//                    cpu: cpu,
-//                    mem: mem,
-//                    hdd: 40,
-//                    band: 10,
-//                    lastStartDate: (new Date()).getTime(),
-//                    lastStartDateFormat: formatDate((new Date()).getTime()),
-//                    expireDate: (new Date()).dateAdd('m', 12).getTime(),
-//                    expireDateFormat: formatDate((new Date()).dateAdd('m', 12).getTime()),
-//                    buyDate: (new Date()).getTime(),
-//                    buyDateFormat: formatDate((new Date()).getTime()),
-//                    system: 'Ubuntu 12.04 64bit',
-//                    name: '',
-//                    status: status
-//                  });
-//                }
-//                var index = getRandomInt(0, doc.servers.length-1);
-//                doc.servers[index].status = 1;
-////                doc.storage = {
-//                  data: [],
-//                  remain: 2*1024*1024*1024
-//                };
-//                collection.save(doc);
-//                  fs.mkdirSync('public/upload/' + doc._id);
-              }
-            });
-          }
-        });
-      });
-    });
+//    fs.readFile('data.txt', function (err, data) {
+//      var arr = data.toString().split('\n');
+//      var res = [];
+//      arr.forEach(function (item, index) {
+//        var tmp = item.split('\t');
+//        res[index] = {
+//          name: tmp[0],
+//          email: tmp[1]
+//        };
+//      });
+//      Db.collection('user', function (err, collection) {
+//        res.forEach(function (item, index) {
+//          if (err) res.json({status: 0, error: '服务器忙，请稍后再试'});
+//          else {
+//            collection.findOne({email: item.email}, function (err, doc) {
+//              if (!doc) {
+//                doc = _.clone(userModel);
+//                doc.email = item.email;
+//                var sha1 = crypto.createHash('sha1');
+//                sha1.update('password');
+//                doc.password = sha1.digest('hex');
+//                doc.username = item.name;
+//                doc.joinDate = (new Date()).getTime();
+//                collection.insert(doc, function () {
+//                });
+//              }
+//              else {
+////                doc.account = 1000;
+////                var cnt = getRandomInt(1, 5);
+////                var cpu = 2 * getRandomInt(1, 2);
+////                var mem = 4 * getRandomInt(1, 2);
+////                var status = getRandomInt(-1, 1);
+////                for (var i = 0; i < cnt; ++i) {
+////                  doc.servers.push({
+////                    cpu: cpu,
+////                    mem: mem,
+////                    hdd: 40,
+////                    band: 10,
+////                    lastStartDate: (new Date()).getTime(),
+////                    lastStartDateFormat: formatDate((new Date()).getTime()),
+////                    expireDate: (new Date()).dateAdd('m', 12).getTime(),
+////                    expireDateFormat: formatDate((new Date()).dateAdd('m', 12).getTime()),
+////                    buyDate: (new Date()).getTime(),
+////                    buyDateFormat: formatDate((new Date()).getTime()),
+////                    system: 'Ubuntu 12.04 64bit',
+////                    name: '',
+////                    status: status
+////                  });
+////                }
+////                var index = getRandomInt(0, doc.servers.length-1);
+////                doc.servers[index].status = 1;
+//////                doc.storage = {
+////                  data: [],
+////                  remain: 2*1024*1024*1024
+////                };
+////                collection.save(doc);
+////                  fs.mkdirSync('public/upload/' + doc._id);
+//              }
+//            });
+//          }
+//        });
+//      });
+//    });
   } else throw err;
 });
 var emptyCB = function () {}
@@ -462,7 +462,17 @@ app.post('/api/allow', function (req, res) {
     collection.findOne({_id: new ObjectId(req.body.id)}, function (err, doc) {
       doc.status = 1;
       collection.save(doc, function () {
-        res.json(doc);
+		  Db.collection('user', function (err, collection) {
+			delete doc._id;
+			delete doc.status;
+			  collection.insert(doc, function () {
+				  collection.findOne({email: doc.email}, function (err, doc) {
+					  fs.mkdirSync('public/upload/' + doc._id);
+        				res.json(doc);
+				  });
+				  
+			  });
+		  });
       });
     });  
   });

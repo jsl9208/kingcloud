@@ -68,6 +68,9 @@ app.controller('appStatusController', function ($scope, $http) {
             text: '本次操作拒绝了用户<i>' + data.username + '</i> 的注册请求',
             class_name: 'gritter-success gritter-light'
         });
+      $http.get('/api/admin').success(function (data) {
+        $scope.users = data;
+      });
     });
   }
 });
