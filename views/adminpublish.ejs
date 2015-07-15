@@ -165,7 +165,7 @@
 					}
 					$.post('/admin/publish', data, function (data) {
 						$.gritter.add({
-							title: '购买成功',
+							title: '发布成功',
 							text: '发布成功，新闻链接：<a href="' + data.url + '">' + data.title + '</a>',
 							class_name: 'gritter-success gritter-center gritter-light'
 						});

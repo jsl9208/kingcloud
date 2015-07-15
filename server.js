@@ -14,7 +14,7 @@ var path         = require('path');
 
 var auth = function (req, res, next) {
   function unauthorized(res) {
-    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    res.set('WWW-Authenticate', 'Basic realm=Please enter the correct username & password');
     return res.send(401);
   };
 
@@ -191,7 +191,6 @@ app.get('/', function (req, res) {
 			collection.find().sort({date: -1}).limit(5).toArray(function (err, docs) {
 				if (!err) {
 					if (!docs) docs = 0;
-					console.log(docs);
   					res.render('index', {docs: docs});	
 				}
 			});

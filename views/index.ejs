@@ -363,14 +363,17 @@
             <div class="col-md-3">
                 <!-- Our Services -->
                 <div class="who margin-bottom-30">
-                    <div class="headline"><h2>信息推送</h2></div>
+                    <div class="headline"><h2>新闻与政策</h2></div>
                     <% if (docs) { %>
                     <ul class="list-unstyled">
                     	<% for (var i in docs) { %>
-                    	<li>[新闻] <a style="text-decoration: underline; color: #0078b6!important;" href="/news/<%= docs[i]._id %>"><%= docs[i].title %></a><small style="color: gray" class="pull-right"><%= (new Date(docs[i].date)).getMonth() + 1 %>/<%= (new Date(docs[i].date)).getDate() %></small></li>
+                    	<li><a style="text-decoration: underline; color: #0078b6!important;" href="/news/<%= docs[i]._id %>"><%= docs[i].title %></a><small style="color: gray" class="pull-right"><%= (new Date(docs[i].date)).getMonth() + 1 %>/<%= (new Date(docs[i].date)).getDate() %></small></li>
                     	<% } %>
 					</ul>
                     <% } %>
+                </div>
+                <div class="who margin-bottom-30">
+                    <div class="headline"><h2>信息推送</h2></div>
                     <wb:list appkey="152333821" border="n" creater="n" info="n" sidebar="n" footbar="y" width="260" height="500" listid="3839595533973115" uid="2413927517" ></wb:list>
                 </div>
 
@@ -441,11 +444,11 @@
                     <div class="col-md-3 map-img md-margin-bottom-40">
                         <div class="headline"><h2>联系我们</h2></div>                         
                         <address class="md-margin-bottom-40">
-                            东川路800号，闵行区 <br />
+                            北京东路668号科技京城东楼16F，黄浦区 <br />
                             中国，上海 <br />
-                            电话: 800 123 3456 <br />
-                            传真: 800 123 3456 <br />
-                            Email: <a href="mailto:info@sjtucloud.com" class="">info@sjtucloud.com</a>
+                            电话: 021-53086666 <br />
+                            传真: 021-53087413 <br />
+                            Email: <a href="mailto:info@king.sh.cn" class="">info@king.sh.cn</a>
                         </address>
                     </div><!--/col-md-3-->
                     <!-- End Address -->
